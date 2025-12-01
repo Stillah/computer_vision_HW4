@@ -25,6 +25,7 @@ HW4/
 │   └── output/
 │       ├── planned_path.json    # Generated camera path
 │       └── wall_points.json     # Detected wall points
+|       + video examples
 ├── input-data/              # PLY scene files
 ├── requirements.txt
 └── README.md
@@ -61,6 +62,8 @@ This will:
 - Generate a camera path using ray casting
 - Save the path to `src/output/planned_path.json`
 
+Currently hyperparameters are optimized for the Conference Hall map.
+
 ### Step 2: Render Video (Kaggle)
 
 For best performance, use Kaggle with GPU acceleration:
@@ -68,7 +71,7 @@ For best performance, use Kaggle with GPU acceleration:
 1. **Upload Required Files to Kaggle:**
    - `src/video_render.ipynb` - The rendering notebook
    - `src/output/planned_path.json` - Generated camera path
-   - Your PLY scene file (e.g., `Hall_exported.ply`)
+   - Your (exported) PLY scene file (e.g., Conference Hall)
 
 2. **Configure Kaggle Dataset:**
    - Create a dataset with your PLY file
@@ -79,9 +82,8 @@ For best performance, use Kaggle with GPU acceleration:
    ```python
    # In video_render.ipynb, update these paths:
    Config.INPUT_PLY_PATH = "/kaggle/input/your-dataset/Hall_exported.ply"
-   
-   # In the main execution:
-   load_existing_path_pipeline("/kaggle/input/path-dataset/planned_path.json", interpolation_step=0.1)
+   Config.JSON_PATH = "/kaggle/input/your-dataset/planned_path.json"
+
    ```
 
 4. **Run the Notebook:**
@@ -173,15 +175,6 @@ python -m src.main
 - Check `vertical_axis` matches your scene orientation
 - Verify `GLOBAL_UP_VECTOR` is correct for your scene
 
-**Git push timeout (large files):**
-```bash
-# Add large files to .gitignore
-echo "*.ply" >> .gitignore
-echo "*.mp4" >> .gitignore
-echo "input-data/" >> .gitignore
-git add .gitignore
-git commit -m "Ignore large files"
-```
 
 ## Technical Details
 
@@ -200,10 +193,8 @@ git commit -m "Ignore large files"
 - Quaternion smoothing for stable motion
 - Supports camera roll for landscape/portrait orientation
 
-## License
-
-This project is for educational purposes as part of a Computer Vision course assignment.
-
-## Author
-
-Stillah - [GitHub](https://github.com/Stillah/computer_vision_HW4)
+## Future improvements
+- Use better hyperparameters for path planner
+- Improve camera view angle
+- Add slightly randomized movement to the sides
+- Make object detection and adjust camera view based on it
