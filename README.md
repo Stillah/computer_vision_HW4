@@ -1,6 +1,12 @@
 # Computer Vision HW4 - Camera Path Planning and Gaussian Splatting Video Rendering
 
 This project generates cinematic camera paths through 3D Gaussian Splatting scenes and renders smooth fly-through videos.
+## Completed tasks
+* Render a video from inside the scene.
+* Path planning.
+* Obstacle avoidance (more or less).
+* Rendered video that covers most of the scene/area.
+* Produce artistic / professional / innovative / realistic result videos (high-quality rendering).
 
 ## Features
 
